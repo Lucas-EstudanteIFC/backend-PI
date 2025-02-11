@@ -6,6 +6,11 @@ class Estado(models.Model):
     
     def __str__ (self):
         return f"{self.nome} ({self.sigla})"
+    
+    class Meta: 
+        verbose_name = 'Estado'
+        verbose_name_plural = 'Estados'
+
 
 class Cidade(models.Model):
     nome = models.CharField(max_length=50)
@@ -13,6 +18,10 @@ class Cidade(models.Model):
 
     def __str__ (self):
         return f"{self.nome} ({self.estado.sigla})"
+    
+    class Meta: 
+        verbose_name = 'Cidade'
+        verbose_name_plural = 'Cidades'
 
 class Pessoa(models.Model):
     nome = models.CharField(max_length=40)
@@ -22,4 +31,8 @@ class Pessoa(models.Model):
     cidade=models.ForeignKey(Cidade, on_delete=models.PROTECT)
 
     def __str__ (self):
-        return self.nome
+        return f"{self.nome} ({self.cidade.nome}/{self.cidade.estado.sigla})"
+    
+    class Meta: 
+        verbose_name = 'Pessoa'
+        verbose_name_plural = 'Pessoas'
